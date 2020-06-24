@@ -18,37 +18,22 @@ import java.util.List;
 
 public class master extends TelegramLongPollingBot {
 
-    public static void main(String[] args)
-    {
+    Count0 count0;
+    private int count = 0;
+
+    public static void main(String[] args) {
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-        try
-        {
+        try {
+
             telegramBotsApi.registerBot(new master());
         } catch (TelegramApiRequestException e) {
             e.printStackTrace();
         }
     }
 
-    public void sendMsg(Message message, String text)
-    {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.enableMarkdown(false);
-        System.out.println(sendMessage.setChatId(message.getChatId().toString()));
-        sendMessage.setChatId(message.getChatId().toString());
-        sendMessage.setText(text);
-        try
-        {
-            setButtons(sendMessage);
-            sendMessage(sendMessage);
-        } catch (TelegramApiException e)
-        {
-            e.printStackTrace();
-        }
-    }
 
-    public void setButtons(SendMessage sendMessage)
-    {
+    public void setButtons(SendMessage sendMessage) {
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         sendMessage.setReplyMarkup(replyKeyboardMarkup);
         replyKeyboardMarkup.setSelective(false);
@@ -65,28 +50,34 @@ public class master extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
     }
 
+
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
-        Model model = new Model();
-        if(message!=null && message.hasText())
-        {
-            switch (message.getText())
-            {
-                case "/help":
-                    sendMsg(message,"Чем могу помочь?");
-                    break;
-                case "/setting":
-                    sendMsg(message,"Настройки");
-                    break;
-                default:
+        count0 = new Count0();
+        if (message != null && message.hasText()) {
+            switch (count) {
+                case 0:
                     try {
-                        sendMsg(message,Weather.getWeather(message.getText(),model));
-                    } catch (IOException e) {
-                        sendMsg(message,"Город не найден!!");
+                        count0.Say(message);
+                        count++;
+                        break;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
+
+                case 1:
+                    try {
+                        count0.SayName(message);
+                        break;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
             }
+
         }
     }
+
 
     public String getBotUsername() {
         return "testQWERT123456789_bot";
