@@ -4,7 +4,9 @@ import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.games.Game;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -18,6 +20,10 @@ import java.util.List;
 
 public class master extends TelegramLongPollingBot {
 
+    private static final String BotUserName = "testQWERT123456789_bot";
+    private static final String token = "1133891649:AAETmVNnjaIZoln20eeG_ptTBJsJr2GqSeQ";
+    Keyboards keyboards = new Keyboards();
+
     Count0 count0;
     private int count = 0;
 
@@ -25,32 +31,24 @@ public class master extends TelegramLongPollingBot {
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         try {
-
             telegramBotsApi.registerBot(new master());
         } catch (TelegramApiRequestException e) {
             e.printStackTrace();
         }
     }
 
+    public SendMessage sendMessager(Message message) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.enableMarkdown(false);
+        sendMessage.setChatId(message.getChatId().toString());
 
-    public void setButtons(SendMessage sendMessage) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-        replyKeyboardMarkup.setSelective(false);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
-
-        List<KeyboardRow> keyboardRowList = new ArrayList<>();
-        KeyboardRow keyboardFirstRow = new KeyboardRow();
-
-        keyboardFirstRow.add(new KeyboardButton("Help"));
-        keyboardFirstRow.add(new KeyboardButton("Setting"));
-
-        keyboardRowList.add(keyboardFirstRow);
-        replyKeyboardMarkup.setKeyboard(keyboardRowList);
+        return sendMessage;
     }
 
 
+
+
+    @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
         count0 = new Count0();
@@ -58,8 +56,29 @@ public class master extends TelegramLongPollingBot {
             switch (count) {
                 case 0:
                     try {
+
                         count0.Say(message);
-                        count++;
+                        if(update.getMessage().getText().equals("Setting"))
+                        {
+                            keyboards.t++;
+                            SendMessage send = new SendMessage();
+                            send = sendMessager(message);
+                            send.setText("Ваш счет" + keyboards.t);
+
+
+                            try {
+
+                                sendMessage(send);
+                            } catch (TelegramApiException e) {
+                                e.printStackTrace();
+                            }
+                            Thread.sleep(500);
+
+
+                        }
+                        System.out.println(keyboards.t);
+
+
                         break;
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -78,12 +97,13 @@ public class master extends TelegramLongPollingBot {
         }
     }
 
-
+    @Override
     public String getBotUsername() {
-        return "testQWERT123456789_bot";
+        return BotUserName;
     }
 
+    @Override
     public String getBotToken() {
-        return "1133891649:AAETmVNnjaIZoln20eeG_ptTBJsJr2GqSeQ";
+        return token;
     }
 }

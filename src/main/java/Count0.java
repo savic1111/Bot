@@ -1,10 +1,14 @@
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 
 class Count0 {
+
+
+
 
     public String[] GREETING =
             {
@@ -30,19 +34,24 @@ class Count0 {
                     "Хорошо"
             };
 
+   Keyboards keyboards = new Keyboards();
 
     void Say(Message message) throws InterruptedException {
 
         for (int i = 0; i <= GREETING.length - 1; i++) {
             master m = new master();
-            SendMessage sendMessage = new SendMessage();
-            sendMessage.enableMarkdown(false);
-            System.out.println(sendMessage.setChatId(message.getChatId().toString()));
-            sendMessage.setChatId(message.getChatId().toString());
-            sendMessage.setText(GREETING[i]);
+            Keyboards keyboards = new Keyboards();
+            SendMessage send = new SendMessage();
+            send = m.sendMessager(message);
+            send.setText(GREETING[i]);
 
             try {
-                m.sendMessage(sendMessage);
+
+
+                keyboards.setButtons(send);
+                m.sendMessage(send);
+
+
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
@@ -52,19 +61,36 @@ class Count0 {
     }
 
     void SayName(Message message) throws InterruptedException {
-            master m = new master();
-            SendMessage sendMessage = new SendMessage();
-            sendMessage.enableMarkdown(false);
-            System.out.println(sendMessage.setChatId(message.getChatId().toString()));
-            sendMessage.setChatId(message.getChatId().toString());
-            sendMessage.setText("Ну здарова"+message.getText());
+        master m = new master();
 
-            try {
-                m.sendMessage(sendMessage);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-            Thread.sleep(500);
+        SendMessage send = new SendMessage();
+        send = m.sendMessager(message);
+        send.setText("Ну привет" + message.getText());
+
+        try {
+
+            m.sendMessage(send);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+        Thread.sleep(500);
+    }
+
+    void SayCount(Message message) throws InterruptedException {
+        master m = new master();
+
+        SendMessage send = new SendMessage();
+        send = m.sendMessager(message);
+        send.setText("Ваш счет" + keyboards.t);
+
+
+        try {
+
+            m.sendMessage(send);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+        Thread.sleep(500);
     }
 
 }
