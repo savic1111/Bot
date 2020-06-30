@@ -51,6 +51,7 @@ public class master extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
+        Model model = new Model();
         count0 = new Count0();
         if (message != null && message.hasText()) {
             switch (count) {
@@ -60,14 +61,15 @@ public class master extends TelegramLongPollingBot {
                         count0.Say(message);
                         if(update.getMessage().getText().equals("Setting"))
                         {
-                            keyboards.t++;
+                            keyboards.count++;
                             SendMessage send = new SendMessage();
                             send = sendMessager(message);
-                            send.setText("Ваш счет" + keyboards.t);
+                            send.setText("Ваш счет" + keyboards.count);
+
 
 
                             try {
-
+                                keyboards.setButtons(send);
                                 sendMessage(send);
                             } catch (TelegramApiException e) {
                                 e.printStackTrace();
@@ -76,7 +78,7 @@ public class master extends TelegramLongPollingBot {
 
 
                         }
-                        System.out.println(keyboards.t);
+                        System.out.println(keyboards.count);
 
 
                         break;

@@ -5,6 +5,8 @@ public class Model {
     private Double humidity;
     private String icon;
     private String main;
+    private int count;
+
 
     public String getName() {
         return name;
@@ -49,6 +51,4 @@ public class Model {
     public void setMain(String main) {
         this.main = main;
     }
-
-
 }

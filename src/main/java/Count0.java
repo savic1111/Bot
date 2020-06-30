@@ -48,7 +48,7 @@ class Count0 {
             try {
 
 
-                keyboards.setButtons(send);
+
                 m.sendMessage(send);
 
 
@@ -81,7 +81,7 @@ class Count0 {
 
         SendMessage send = new SendMessage();
         send = m.sendMessager(message);
-        send.setText("Ваш счет" + keyboards.t);
+        send.setText("Ваш счет");
 
 
         try {
