@@ -16,11 +16,4 @@ public class Model {
     private String icon;
     private String main;
     private int count;
-
-
-    public int getCount()
-    {
-        return count;
-    }
-
 }
