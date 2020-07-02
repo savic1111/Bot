@@ -12,20 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Keyboards {
-
-    Update update;
+   ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+    int count = 0;
     Model model = new Model();
-    ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-    int count =0;
 
     public void setButtons(SendMessage sendMessage) {
         sendMessage.setReplyMarkup(replyKeyboardMarkup);
         replyKeyboardMarkup.setSelective(false);
         replyKeyboardMarkup.setResizeKeyboard(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(false);
 
         List<KeyboardRow> keyboardRowList = new ArrayList<>();
-keyboardRowList.clear();
+        keyboardRowList.clear();
         KeyboardRow keyboardFirstRow = new KeyboardRow();
         keyboardFirstRow.add("Help - " + count);
         keyboardFirstRow.add("Setting");
@@ -40,6 +38,12 @@ keyboardRowList.clear();
         keyboardSecondRow.add("0");
         keyboardSecondRow.add("0");
 
+        KeyboardRow keyboardFourthRow = new KeyboardRow();
+        keyboardFourthRow.add("0");
+        keyboardFourthRow.add("0");
+        keyboardFourthRow.add("0");
+        keyboardFourthRow.add("0");
+        keyboardFourthRow.add("0");
 
 
         KeyboardRow keyboardThirdRow = new KeyboardRow();
@@ -50,10 +54,11 @@ keyboardRowList.clear();
         keyboardThirdRow.add("Help - " + count);
 
 
-
         keyboardRowList.add(keyboardFirstRow);
         keyboardRowList.add(keyboardSecondRow);
+        keyboardRowList.add(keyboardFourthRow);
         keyboardRowList.add(keyboardThirdRow);
+
 
         replyKeyboardMarkup.setKeyboard(keyboardRowList);
 

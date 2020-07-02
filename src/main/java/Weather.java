@@ -27,7 +27,6 @@ public class Weather {
         JSONObject main = jsonObject.getJSONObject("main");
         model.setTemp(main.getDouble("temp"));
 
-
         return "В этом городе температура где-то "+model.getName();
     }
 }
