@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Keyboards {
+
+
    ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
     int count = 0;
-    Model model = new Model();
+    Fight fight = new Fight();
 
     public void setButtons(SendMessage sendMessage) {
         sendMessage.setReplyMarkup(replyKeyboardMarkup);
@@ -25,33 +27,33 @@ public class Keyboards {
         List<KeyboardRow> keyboardRowList = new ArrayList<>();
         keyboardRowList.clear();
         KeyboardRow keyboardFirstRow = new KeyboardRow();
-        keyboardFirstRow.add("Help - " + count);
+        keyboardFirstRow.add("Help");
         keyboardFirstRow.add("Setting");
         keyboardFirstRow.add("Counter");
         keyboardFirstRow.add("Weapon");
         keyboardFirstRow.add("Inventory");
 
         KeyboardRow keyboardSecondRow = new KeyboardRow();
-        keyboardSecondRow.add("0");
-        keyboardSecondRow.add("0");
-        keyboardSecondRow.add("0");
-        keyboardSecondRow.add("0");
-        keyboardSecondRow.add("0");
+        keyboardSecondRow.add(""+fight.WEAPON_ENEMY_1);
+        keyboardSecondRow.add(""+fight.WEAPON_ENEMY_1);
+        keyboardSecondRow.add(""+fight.WEAPON_ENEMY_1);
+        keyboardSecondRow.add(""+fight.WEAPON_ENEMY_1);
+        keyboardSecondRow.add(""+fight.WEAPON_ENEMY_1);
 
         KeyboardRow keyboardFourthRow = new KeyboardRow();
-        keyboardFourthRow.add("0");
-        keyboardFourthRow.add("0");
-        keyboardFourthRow.add("0");
-        keyboardFourthRow.add("0");
-        keyboardFourthRow.add("0");
+        keyboardFourthRow.add(""+fight.WEAPON_1);
+        keyboardFourthRow.add(""+fight.WEAPON_2);
+        keyboardFourthRow.add(""+fight.WEAPON_3);
+        keyboardFourthRow.add(""+fight.WEAPON_4);
+        keyboardFourthRow.add(""+fight.WEAPON_5);
 
 
         KeyboardRow keyboardThirdRow = new KeyboardRow();
-        keyboardThirdRow.add("Help - " + count);
-        keyboardThirdRow.add("Help - " + count);
-        keyboardThirdRow.add("Help - " + count);
-        keyboardThirdRow.add("Help - " + count);
-        keyboardThirdRow.add("Help - " + count);
+        keyboardThirdRow.add("A" + count);
+        keyboardThirdRow.add("B" + count);
+        keyboardThirdRow.add("C" + count);
+        keyboardThirdRow.add("D" + count);
+        keyboardThirdRow.add("E" + count);
 
 
         keyboardRowList.add(keyboardFirstRow);
