@@ -12,6 +12,7 @@ public class master extends TelegramLongPollingBot {
     private static final String BotUserName = "testQWERT123456789_bot";
     private static final String token = "1133891649:AAETmVNnjaIZoln20eeG_ptTBJsJr2GqSeQ";
     Keyboards keyboards = new Keyboards();
+    TimerMessage timerMessage = new TimerMessage();
 
     Count0 count0;
     private int count = 0;
@@ -44,7 +45,7 @@ public class master extends TelegramLongPollingBot {
                 case 0:
                     try {
 
-                        count0.Say(message);
+                        timerMessage.counter(10,message);
                         count++;
                         if(update.getMessage().getText().equals("Setting"))
                         {
